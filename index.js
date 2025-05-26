@@ -1,65 +1,59 @@
-for (var i = 0; i < document.querySelectorAll(".drum").length; i++) {
-  document.querySelectorAll(".drum")[i].addEventListener("click", function () {
-    var buttonInnerHtml = this.innerHTML;
-    makeSound(buttonInnerHtml);
-    buttonAnimation(buttonInnerHtml);
-  });
-}
+for(var i=0;i<document.querySelectorAll(".drum").length;i++){
 
-document.addEventListener("keypress", function (event) {
+document.querySelectorAll(".drum")[i].addEventListener("click",function(){
+  var buttonInnerHtml = this.innerHTML ;
+        makeSound(buttonInnerHtml);
+        buttonAnimation(buttonInnerHtml);
+  }
+ );}
+
+ 
+ 
+ document.addEventListener("keypress",function(event){
   makeSound(event.key);
   buttonAnimation(event.key);
 });
 
-function makeSound(key) {
-  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  const oscillator = audioCtx.createOscillator();
-  const gainNode = audioCtx.createGain();
 
-  oscillator.type = 'square'; // square wave for a sharper beep
 
-  switch (key) {
+function makeSound(key){
+  switch(key){
     case "w":
-      oscillator.frequency.setValueAtTime(200, audioCtx.currentTime);
-      break;
+        var tom1= new Audio('sounds/tom-1.mp3');
+        tom1.play();
+        break;
     case "a":
-      oscillator.frequency.setValueAtTime(250, audioCtx.currentTime);
+      var tom2= new Audio('sounds/tom-2.mp3');
+      tom2.play();
       break;
     case "s":
-      oscillator.frequency.setValueAtTime(300, audioCtx.currentTime);
+      var tom3= new Audio('sounds/tom-3.mp3');
+      tom3.play();
       break;
     case "d":
-      oscillator.frequency.setValueAtTime(350, audioCtx.currentTime);
+      var tom4= new Audio('sounds/tom-4.mp3');
+      tom4.play();
       break;
     case "j":
-      oscillator.frequency.setValueAtTime(400, audioCtx.currentTime);
+      var crash= new Audio('sounds/crash.mp3');
+      crash.play();
       break;
     case "k":
-      oscillator.frequency.setValueAtTime(450, audioCtx.currentTime);
+      var kick= new Audio('sounds/kick-bass.mp3');
+      kick.play();
       break;
     case "l":
-      oscillator.frequency.setValueAtTime(500, audioCtx.currentTime);
-      break;
-    default:
-      console.log("Unknown key: " + key);
-      return; // exit if key not recognized
-  }
+     var snare= new Audio('sounds/snare.mp3');
+     snare.play();
+     break;
+     default:console.log(key);
 
-  gainNode.gain.setValueAtTime(1, audioCtx.currentTime);
-  gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.2);
-
-  oscillator.connect(gainNode);
-  gainNode.connect(audioCtx.destination);
-
-  oscillator.start();
-  oscillator.stop(audioCtx.currentTime + 0.2);
 }
-
-function buttonAnimation(currentKey) {
-  var activeButton = document.querySelector("." + currentKey);
-  if (!activeButton) return;  // safety check
+}
+function buttonAnimation(currentKey){
+  var activeButton = document.querySelector("."+currentKey);
   activeButton.classList.add("pressed");
-  setTimeout(function () {
-    activeButton.classList.remove("pressed");
-  }, 100);
+  setTimeout(function(){
+    activeButton.classList.remove("pressed")
+  },100) ;
 }
