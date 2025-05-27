@@ -1,12 +1,14 @@
 document.addEventListener("keydown", function(event) {
-    playSound(event.key.toLowerCase());
-    buttonAnimation(event.key.toLowerCase());
+    const key = event.key.toLowerCase();
+    playSound(key);
+    buttonAnimation(key);
 });
 
 document.querySelectorAll(".drum").forEach(button => {
     button.addEventListener("click", function() {
-        playSound(this.innerHTML.toLowerCase());
-        buttonAnimation(this.innerHTML.toLowerCase());
+        const key = this.innerHTML.toLowerCase();
+        playSound(key);
+        buttonAnimation(key);
     });
 });
 
@@ -43,12 +45,12 @@ function playSound(key) {
 }
 
 function buttonAnimation(key) {
-    let activeButton = document.querySelector("." + key);
-    if (!activeButton) return;
+    const button = document.querySelector("." + key);
+    if (!button) return;
 
-    activeButton.classList.add("pressed");
+    button.classList.add("pressed");
 
     setTimeout(() => {
-        activeButton.classList.remove("pressed");
+        button.classList.remove("pressed");
     }, 100);
 }
